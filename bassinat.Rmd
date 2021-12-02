@@ -1,0 +1,30 @@
+---
+title: "bassinat"
+author: "Lindsey Weyant"
+date: "12/2/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidymodels)
+library(readr)
+inat <- read_csv("inat.csv")
+```
+
+```{r plot}
+inat%>%
+  ggplot(aes(x = taxon_kingdom_name)) +
+  geom_bar() +
+  labs(x = "Kingdom Name", y = "Count", Title = "Kingdoms of the ECWA Watershed")
+```
+```{r animalia}
+inatanimalia <- inat %>%
+  filter(taxon_kingdom_name == "Animalia") %>%
+ggplot(aes(x=taxon_class_name)) +
+  geom_bar() +
+  labs(x= "Class Name", y = "Count", Title = "Animalia Observations by Class")
+```
+
+
