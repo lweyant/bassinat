@@ -21,6 +21,11 @@ inat%>%
   labs(x = "Kingdom Name", y = "Count", title = "Kingdoms of the ECWA Watershed")
 ```
 
+```{r speciescount}
+inat%>%
+  count(scientific_name, sort = TRUE)
+```
+
 ```{r fungi}
 inatfungi <- inat %>%
   filter(taxon_kingdom_name == "Fungi")
@@ -107,7 +112,6 @@ inatplantae %>%
   filter(taxon_class_name == "Liliopsida") %>%
 count(scientific_name, sort = TRUE)
 ```
-
 
 
 
