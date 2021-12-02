@@ -14,11 +14,11 @@ library(readr)
 inat <- read_csv("inat.csv")
 ```
 
-```{r plot}
+```{r kingdomplot}
 inat%>%
   ggplot(aes(x = taxon_kingdom_name)) +
   geom_bar() +
-  labs(x = "Kingdom Name", y = "Count", Title = "Kingdoms of the ECWA Watershed")
+  labs(x = "Kingdom Name", y = "Count", title = "Kingdoms of the ECWA Watershed")
 ```
 
 ```{r fungi}
@@ -33,42 +33,62 @@ inatfungi %>%
 inatprotozoa <- inat %>%
   filter(taxon_kingdom_name == "Protozoa")
 ```
-
 ```{r protozoacount}
 inatprotozoa %>%
   count(scientific_name)
 ```
-
-
 ```{r animalia}
 inatanimalia <- inat %>%
   filter(taxon_kingdom_name == "Animalia")
 ```
-```{r}
+```{r animaliacount}
 inatanimalia %>%
     count(scientific_name, sort=TRUE)
 ```
-
-
-```{r animalia2}
-inatanimalia %>%
-  ggplot(aes(x=taxon_class_name)) +
-  geom_bar() +
-  scale_x_discrete(guide = guide_axis(n.dodge=3)) +
-  labs(x= "Class Name", y = "Count", Title = "Animalia Observations by Class")
-```
-
 ```{r plantae}
 inatplantae <- inat %>%
   filter(taxon_kingdom_name == "Plantae")
 ```
-```{r}
+```{r plantaecount}
 inatplantae %>%
   count(scientific_name)
 ```
 
+2 most common kingdoms: animalia and plantae
 
-```{r plantae2}
+```{r animaliaplot}
+inatanimalia %>%
+  ggplot(aes(x=taxon_class_name)) +
+  geom_bar() +
+  scale_x_discrete(guide = guide_axis(n.dodge=3)) +
+  labs(x= "Class Name", y = "Count", title = "Animalia Observations by Class")
+```
+
+```{r insectacount}
+inatanimalia %>%
+  filter(taxon_class_name == "Insecta") %>%
+count(scientific_name, sort = TRUE)
+```
+
+```{r avescount}
+inatanimalia %>%
+  filter(taxon_class_name == "Aves") %>%
+count(scientific_name, sort = TRUE)
+```
+
+```{r amphibiacount}
+inatanimalia %>%
+  filter(taxon_class_name == "Amphibia") %>%
+  count(scientific_name, sort = TRUE)
+```
+
+```{r reptiliacount}
+inatanimalia %>%
+  filter(taxon_class_name == "Reptilia") %>%
+count(scientific_name, sort = TRUE)
+```
+
+```{r plantaeplot}
 inatplantae %>%
   ggplot(aes(x=taxon_class_name)) +
   geom_bar() +
@@ -76,39 +96,15 @@ inatplantae %>%
   labs(x= "Class Name", y = "Count", title = "Plantae Observations by Class")
 ```
 
-```{r insectatable}
-inatanimalia %>%
-  filter(taxon_class_name == "Insecta") %>%
-count(scientific_name, sort = TRUE)
-```
-
-```{r aves}
-inatanimalia %>%
-  filter(taxon_class_name == "Aves") %>%
-count(scientific_name, sort = TRUE)
-```
-
-```{r floweringplants}
+```{r floweringplantscount}
 inatplantae %>%
   filter(taxon_class_name == "Magnoliopsida") %>%
 count(scientific_name, sort = TRUE)
 ```
 
-```{r nonfloweringplants}
+```{r nonfloweringplantscount}
 inatplantae %>%
   filter(taxon_class_name == "Liliopsida") %>%
-count(scientific_name, sort = TRUE)
-```
-
-
-```{r amphibia}
-inatanimalia %>%
-  filter(taxon_class_name == "Amphibia") %>%
-  count(scientific_name, sort = TRUE)
-```
-```{r reptilia}
-inatanimalia %>%
-  filter(taxon_class_name == "Reptilia") %>%
 count(scientific_name, sort = TRUE)
 ```
 
